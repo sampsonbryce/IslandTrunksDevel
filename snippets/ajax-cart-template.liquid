@@ -18,21 +18,20 @@
                 <a href="{{url}}" class="ajaxcart__product-image"><img src="{{img}}" alt="{{name}}"></a>
               </div>
               <div class="grid__item three-quarters">
-                <div class="ajaxcart__product-name--wrapper cart-item-info">
-                  <a href="{{url}}" class="ajaxcart__product-name">{{{name}}}</a>
-                  {{#if variation}}
-                    <span class="ajaxcart__product-meta">{{variation}}</span>
-                  {{/if}}
-                  {{#properties}}
-                    {{#each this}}
-                      {{#if this}}
-                        <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                    <div class="ajaxcart__product-name--wrapper cart-item-info">
+                      <a href="{{url}}" class="ajaxcart__product-name">{{{name}}}</a>
+                      {{#if variation}}
+                        <span class="ajaxcart__product-meta">{{variation}}</span>
                       {{/if}}
-                    {{/each}}
-                  {{/properties}}
+                      {{#properties}}
+                        {{#each this}}
+                          {{#if this}}
+                            <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                          {{/if}}
+                        {{/each}}
+                      {{/properties}}
                 </div>
-                <a class="icon icon-x"></a>
-
+                 <a class="icon icon-x remove-icon"></a>
                 <div class="grid--full display-table">
                   <div class="grid__item display-table-cell one-half">
                     <div class="ajaxcart__qty">
