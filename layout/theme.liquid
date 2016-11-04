@@ -43,7 +43,7 @@
   {% include 'oldIE-js' %}
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
-  <script src={{ 'modernizr.min.js' | asset_url }} async></script>
+  <script src={{ 'modernizr.min.js' | asset_url }}></script>
 
   {% comment %}
     If you store has customer accounts disabled, you can remove the following JS file
@@ -608,8 +608,7 @@
 
   </div>
 
-
-  <script src={{ 'theme.js' | asset_url }} async></script>
+  <script src={{ 'theme.js' | asset_url }}></script>
 
   {% comment %}
     Template-specific js
@@ -736,6 +735,16 @@ jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blan
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/unveil/1.3.0/jquery.unveil.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
+
+        // This just feels super hacky
+        window.setTimeout(function(){
+            var notif = $('#purchase-notification');
+            if(notif.css('background-color') === 'rgba(0, 0, 0, 0)'){
+                console.log('setting display to none');
+               notif.css("display", "none");
+            }
+        }, 2000);
+
   		$("img").unveil(50, function() {
   			$(this).load(function() {
     			this.style.opacity = 1;

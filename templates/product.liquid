@@ -25,7 +25,7 @@
         {% for image in product.images %}
           {% unless image contains featured_image %}
             <div class="product-single__photo-wrapper">
-              <img class="product-single__photo" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+              <img class="product-single__photo" data-src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
             </div>
           {% endunless %}
         {% endfor %}
