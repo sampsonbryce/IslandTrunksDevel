@@ -95,17 +95,19 @@
           {% if linklists[child_list_handle].links != blank %}
             <li class="mobile-nav__item{% unless template == 'index' %}{% if link.active %} mobile-nav__item--active{% endif %}{% endunless %}">
               <div class="mobile-nav__has-sublist">
-                <a href="{{ link.url }}" class="mobile-nav__link" id="Label-{{ child_list_handle }}">{{ link.title }}</a>
                 <div class="mobile-nav__toggle">
                   <button type="button" class="mobile-nav__toggle-btn icon-fallback-text" data-aria-controls="Linklist-{{ child_list_handle }}">
-                    <span class="icon-fallback-text mobile-nav__toggle-open">
-                      <span class="icon icon-plus" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ 'general.drawers.expand_submenu' | t }}</span>
-                    </span>
-                    <span class="icon-fallback-text mobile-nav__toggle-close">
-                      <span class="icon icon-minus" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ 'general.drawers.collapse_submenu' | t }}</span>
-                    </span>
+                    <a href="{{ link.url }}" class="mobile-nav__link mobile-nav__dropdown" id="Label-{{ child_list_handle }}">{{ link.title }}</a>
+                    <div class="mobile-nav__icon-container">
+                      <span class="icon-fallback-text mobile-nav__toggle-open">
+                        <span class="icon icon-plus" aria-hidden="true"></span>
+                        <span class="fallback-text">{{ 'general.drawers.expand_submenu' | t }}</span>
+                      </span>
+                      <span class="icon-fallback-text mobile-nav__toggle-close">
+                        <span class="icon icon-minus" aria-hidden="true"></span>
+                        <span class="fallback-text">{{ 'general.drawers.collapse_submenu' | t }}</span>
+                      </span>
+                    </div>
                   </button>
                 </div>
               </div>
@@ -243,7 +245,7 @@
                   {% endcomment %}
                   {% assign child_list_handle = link.title | handleize %}
                   {% if linklists[child_list_handle].links != blank %}
-                    <li class="site-nav__item site-nav__expanded-item site-nav--has-dropdown{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}" aria-haspopup="true">
+                    <li class="site-nav__item site-nav__expanded-item site-nav--has-dropdown main-dropdown{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}" aria-haspopup="true">
                       <a href="{{ link.url }}" class="site-nav__link">
                         {{ link.title }}
                         <span class="icon icon-arrow-down" aria-hidden="true"></span>
@@ -606,7 +608,6 @@
 
   </div>
 
-
   {{ 'theme.js' | asset_url | script_tag }}
 
   {% comment %}
@@ -649,7 +650,7 @@
   
 	<script type="text/javascript" src="https://www.affiliatly.com/other_frameworks.js?affiliatly_code=AF-102943"></script>
 
-<!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END -->
+{% comment %}<!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END -->{% endcomment %}
 <!-- google dynamic remarketing tag for theme.liquid -->
     {% if template contains 'product' %}
         <script type="text/javascript">
@@ -734,9 +735,17 @@ jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blan
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/unveil/1.3.0/jquery.unveil.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-  		$("img").unveil(200,function() {
+        // This just feels super hacky
+        window.setTimeout(function(){
+            var notif = $('#purchase-notification');
+            if(notif.css('background-color') === 'rgba(0, 0, 0, 0)'){
+                console.log('setting display to none');
+               notif.css("display", "none");
+            }
+        }, 2000);
+
+  		$("img").unveil(50, function() {
   			$(this).load(function() {
-              	console.log('setting opacity');
     			this.style.opacity = 1;
   			});
 		});
