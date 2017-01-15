@@ -728,6 +728,9 @@ var google_remarketing_only = true;
 <script>
 jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blank');
 </script>
+  
+{{ 'wait-till-exists.js' | asset_url | script_tag }}
+
 
 {% comment %}
     Lazy Load Library
@@ -739,7 +742,6 @@ jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blan
         window.setTimeout(function(){
             var notif = $('#purchase-notification');
             if(notif.css('background-color') === 'rgba(0, 0, 0, 0)'){
-                console.log('setting display to none');
                notif.css("display", "none");
             }
         }, 2000);
@@ -749,6 +751,16 @@ jQuery('a[href^="http"]').not('a[href^="{{ shop.url }}"]').attr('target', '_blan
     			this.style.opacity = 1;
   			});
 		});
+      	
+      // Recolor get discount
+      console.log($('.bk-cbox-btn-position'));
+      
+      $('.bk-cbox-btn-position').waitUntilExists(function(){
+        $('.bk-cbox-btn-position').css('background-color', '#00b8ff');
+        $('.bk-cbox-btn-position').css('border-color', '#00b8ff');
+        $('.bk-cbox-btn-position').css('border-top-left-radius', '0px');
+        $('.bk-cbox-btn-position').css('border-top-right-radius', '0px');
+      });
 	});
   </script>
 </body>

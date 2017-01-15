@@ -89,9 +89,13 @@
             {% endcomment %}
 
             <div class="product-single__add-to-cart">
-              <button type="submit" name="add" id="AddToCart" class="btn">
+              <button type="submit" name="add" id="AddToCart" class="btn btn-blue">
                 <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
               </button>
+              
+              <!--spreadr file--->
+              {% include 'spreadr' %}
+              
             </div>
           </form>
 

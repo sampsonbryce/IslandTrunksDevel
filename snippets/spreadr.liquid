@@ -1,0 +1,132 @@
+{% if template contains "product" %}
+
+ <button id="SpreadrLink" type="button" style="display:none;" name="SpreadrLink" class="btn" 
+                    onclick="SpreadrButtonClick()"
+                    data-comtag="islandtrunks-20" 
+                    data-intag="" 
+                    data-catag="" 
+                    data-uktag="" 
+                    data-detag="" 
+                    data-redirect-url="{{product.metafields.global["spreadr-url"] | escape }}" 
+                    data-spreadr-tag="{{product.metafields.global["spreadr-tag"] | escape }}" 
+                    data-region="{{product.metafields.global["spreadr-region"] | escape }}" 
+                    data-product-tag="{{product.tags | escape }}" 
+                    data-spreadr-userid="298"
+                    >
+              <span id="SpreadrLinkText">BUY NOW</span>
+</button>
+
+<script>
+  
+var SpreadrWrapper = document.getElementById("SpreadrLink");
+setTimeout(function waitSpreadrWrapper() {
+    if (document.body.contains(SpreadrWrapper)) {
+        SpreadrInit();
+    } else {
+        setTimeout(waitSpreadrWrapper, 100);
+    }
+}, 100);
+        
+function SpreadrInit(){
+    var spreadrtags = $("#SpreadrLink").attr("data-spreadr-tag");
+    var findString = "spreadr-affiliate";
+  
+   if((spreadrtags !== undefined) && (spreadrtags !== null) && (spreadrtags !== ""))
+    {
+      
+       var spreadrtagindex = spreadrtags.indexOf(findString);
+      
+ 	   if (spreadrtagindex > -1) 
+        {        	          
+          
+          var hiddentag = $("#SpreadrLink").attr("data-product-tag");
+  		   var findText = "spreadr-hidden";
+          
+           if((hiddentag !== undefined) && (hiddentag !== null) && (hiddentag !== ""))
+            {
+              var hiddentagindex = hiddentag.indexOf(findText);
+              
+               if (hiddentagindex < 0)
+               {                 
+                 	SpreadrShowButton();       
+                 
+               }
+              
+            }   
+            else
+            {
+              SpreadrShowButton();    
+            }       
+         
+      	}
+    }
+}  
+
+
+    
+function SpreadrShowButton()
+{
+  var Spreadraddtocartform = document.querySelector("form[action='/cart/add']");
+  var Spreadraddtocartbutton = Spreadraddtocartform.querySelector("[type='submit']");
+  var Spreadrlinkbutton = document.getElementById("SpreadrLink"); 
+
+//code for special themes
+  if((Spreadraddtocartbutton === undefined) || (Spreadraddtocartbutton === null) || (Spreadraddtocartbutton === ""))
+  {    
+    Spreadraddtocartbutton = document.getElementById("add-to-cart");    
+    if((Spreadraddtocartbutton === undefined) || (Spreadraddtocartbutton === null) || (Spreadraddtocartbutton === ""))
+    {
+        Spreadraddtocartbutton = document.getElementById("product-add-to-cart");
+    }
+    else
+    {
+        Spreadraddtocartbutton.classList.remove("add-to-cart");    
+    }
+  }
+  
+  Spreadrlinkbutton.className += " " + Spreadraddtocartbutton.classList;
+  
+  Spreadraddtocartbutton.style.display = "none";  
+  Spreadrlinkbutton.style.display = "block";
+  //console.log("1");
+   
+    setInterval(function () {
+        Spreadraddtocartbutton.style.display = "none";  
+        Spreadrlinkbutton.style.display = "block";        
+        //console.log("3");
+    }, 4000);
+}
+
+    
+function SpreadrButtonClick()
+{  	
+    var spreadrRedirectURL = document.getElementById("SpreadrLink").getAttribute("data-redirect-url");
+    
+    var region = document.getElementById("SpreadrLink").getAttribute("data-region");    
+    var affiliateTag = "";
+    if(region == "com")
+    {
+        affiliateTag = document.getElementById("SpreadrLink").getAttribute("data-comtag");
+    }
+    else if(region == "in")
+    {
+        affiliateTag = document.getElementById("SpreadrLink").getAttribute("data-intag");
+    }
+     else if(region == "ca")
+    {
+        affiliateTag = document.getElementById("SpreadrLink").getAttribute("data-catag");
+    }
+      else if(region == "co.uk")
+    {
+        affiliateTag = document.getElementById("SpreadrLink").getAttribute("data-uktag");
+    }
+     else if(region == "de")
+    {
+        affiliateTag = document.getElementById("SpreadrLink").getAttribute("data-detag");
+    }
+    window.open(spreadrRedirectURL+"?tag="+affiliateTag);
+}
+  
+</script>
+  
+{% endif %}
