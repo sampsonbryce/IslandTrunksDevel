@@ -92,10 +92,10 @@
               <button type="submit" name="add" id="AddToCart" class="btn btn-blue">
                 <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
               </button>
-              
+
               <!--spreadr file--->
               {% include 'spreadr' %}
-              
+
             </div>
           </form>
 
@@ -112,13 +112,15 @@
     </div>
   </div>
 
+  <hr class='hr--large hr--full-width'/>
+  {% include 'related-products' %}
+
   {% if collection %}
     <hr class="hr--clear">
     <div class="text-center">
       <a href="{{ collection.url }}" class="return-link">&larr; {{ 'products.general.collection_return' | t: collection: collection.title }}</a>
     </div>
   {% endif %}
-
 </div>
 
 {% comment %}
