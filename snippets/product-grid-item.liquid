@@ -32,7 +32,7 @@
   <div class="grid-product__wrapper">
     <div class="grid-product__image-wrapper">
       <a class="grid-product__image-link" href="{{ product.url | within: collection }}">
-        <img src="{{ 'ajax-loader.gif' | asset_url }} " data-src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
+        <img src="{{ "dummy_short_image.jpg" | asset_url }}" data-src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
       </a>
       {% if sold_out %}
         <div class="grid-product__sold-out">
