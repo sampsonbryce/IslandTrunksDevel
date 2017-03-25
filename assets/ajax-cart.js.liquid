@@ -234,7 +234,6 @@ var ajaxCart = (function(module, $) {
       $cartCountSelector.html(cart.item_count).removeClass('hidden-count');
 
       if (cart.item_count === 0) {
-        console.log('removing from cart', cart);
         $cartCountSelector.addClass('hidden-count');
       }
     }
@@ -370,7 +369,6 @@ var ajaxCart = (function(module, $) {
         var line = button.data('line');
         updateQuantity(line, 0);
     });
-
     // Add or remove from the quantity
     $body.on('click', '.ajaxcart__qty-adjust', function() {
       if (isUpdating) {
